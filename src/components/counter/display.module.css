@@ -1,0 +1,11 @@
+.red{
+    color: red;
+}
+.normal{
+    padding: 20px 30px;
+    background-color: #61dafb;
+    /*width: 200px;*/
+    margin: 10px auto;
+    border-radius: 15px;
+    font-size: 30px;
+}
