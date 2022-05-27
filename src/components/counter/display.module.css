@@ -1,15 +1,16 @@
 .red{
-    color: red;
+    color: red !important;
 }
 .normal{
     display: grid;
     padding: 20px 30px;
-    background-color: #61dafb;
+    border: 2px solid #61dafb;
     margin: 20px 20px;
     border-radius: 15px;
     font-size: 30px;
     height: 100px;
     align-content: center;
+    color: #61dafb;;
 }
 
 .textValueCounter{

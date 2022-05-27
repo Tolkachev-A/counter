@@ -2,16 +2,16 @@
     margin: 10px 40px;
     padding: 15px 30px;
     border-radius: 15px;
-    background-color: #0d6efd;
+    background-color: #61dafb;
     color: white;
     border: none;
     cursor: pointer;
-
+color: white;
     justify-self: center;
 }
 
 .btn:hover{
-    background-color: #5396fa;
+    background-color: #19c6f5;
     transition: 1s;
 }
 
