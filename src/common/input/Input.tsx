@@ -1,4 +1,5 @@
 import React from 'react';
+import style from './input.module.css'
 
 export type InpytPropsType = {
     title: string
@@ -8,7 +9,7 @@ export type InpytPropsType = {
     callbackOnFocus: (isSetings:boolean) => void
 }
 export const Input: React.FC<InpytPropsType> = ({title, value,className, callback, callbackOnFocus}) => {
-    const finalClassName=className
+    const finalClassName=`  ${style.inpytStyle} ${className}`
     return (
         <label>
             <span>{title}: </span>
