@@ -1,4 +1,4 @@
-.btn{
+.btn {
     margin: 10px 40px;
     padding: 15px 30px;
     border-radius: 15px;
@@ -6,22 +6,22 @@
     color: white;
     border: none;
     cursor: pointer;
-color: white;
+    color: white;
     justify-self: center;
 }
 
-.btn:hover{
+.btn:hover {
     background-color: #19c6f5;
     transition: 1s;
 }
 
-.btn:disabled{
+.btn:disabled {
     cursor: no-drop;
     opacity: 0.5;
     color: black;
 }
 
-.btnBlock{
+.btnBlock {
     border: 5px #61dafb solid;
     border-radius: 15px;
     margin: 20px 20px;
@@ -31,6 +31,17 @@ color: white;
     grid-template-columns: 1fr 1fr;
 }
 
-.btnBlockSetings{
+.btnBlockSetings {
     grid-template-columns: 1fr;
- }
+}
+
+
+@media (max-width: 425px) {
+    .btnBlock{
+        /*grid-template-columns: 1fr ;*/
+
+    }
+    .btn{
+        margin: 5px;
+    }
+}

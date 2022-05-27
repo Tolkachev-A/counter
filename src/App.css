@@ -4,7 +4,7 @@
     border-radius: 15px;
     margin: 20px 20px;
     justify-self: center;
-    width: 500px;
+    max-width: 500px;
 }
 .container{
     display: grid;
@@ -12,6 +12,20 @@
     height: 100vh;
     align-items: center;
     background-color: #323232;
+}
+
+@media (max-width: 1024px) {
+    .container{
+        grid-template-columns: 1fr ;
+    }
+    .counter{
+        min-width: 280px;
+        width: 80%;
+margin: 0;
+    }
+}
+@media (max-width: 425px) {
+
 }
 
 
