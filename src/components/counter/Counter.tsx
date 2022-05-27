@@ -1,24 +1,33 @@
 import React from 'react';
 import {Display} from "./Display";
 import {Button} from "../../common/button/Button";
+import style from '../../common/button/button.module.css'
 
 export type CounterPropsType = {
-    valueСounter: number
-    setValueСounter: (num: number) => void
+    valueCounter: number
+    setValueCounter: (num: number) => void
     maxValue: number
     startValue: number
+    isSetings: boolean
+    inCorrectValue: boolean
 }
 
-export const Counter: React.FC<CounterPropsType> = ({valueСounter, setValueСounter, maxValue, startValue}) => {
+export const Counter: React.FC<CounterPropsType> = (props) => {
     return (
-        <div className="counter">
-            <Display value={valueСounter} maxValue={maxValue}/>
-            <Button name={'inc'}
-                    callback={() => setValueСounter(valueСounter + 1)}
-                    disabled={valueСounter === maxValue}/>
-            <Button name={'reset'}
-                    callback={() => setValueСounter(startValue)}
-                    disabled={valueСounter === startValue}/>
+        <div>
+            <Display valueCounter={props.valueCounter}
+                     maxValue={props.maxValue}
+                     isSetings={props.isSetings}
+                     startValue={props.startValue}
+                     inCorrectValue={props.inCorrectValue}/>
+            <div className={style.btnBlock}>
+                <Button name={'inc'}
+                        callback={() => props.setValueCounter(props.valueCounter + 1)}
+                        disabled={props.isSetings || props.valueCounter >= props.maxValue}/>
+                <Button name={'reset'}
+                        callback={() => props.setValueCounter(props.startValue)}
+                        disabled={props.isSetings ||props.valueCounter === props.startValue}/>
+            </div>
         </div>
     );
 };

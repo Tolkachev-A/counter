@@ -3,17 +3,20 @@ import React from 'react';
 export type InpytPropsType = {
     title: string
     value: number
+    className?:string
     callback: (num: number) => void
     callbackOnFocus: (isSetings:boolean) => void
 }
-export const Input: React.FC<InpytPropsType> = ({title, value, callback, callbackOnFocus}) => {
+export const Input: React.FC<InpytPropsType> = ({title, value,className, callback, callbackOnFocus}) => {
+    const finalClassName=className
     return (
         <label>
-            <b>{title}: </b>
+            <span>{title}: </span>
             <input value={value}
                    onChange={(e) => callback(+e.currentTarget.value)}
                    type='number'
                    onFocus={()=>callbackOnFocus(true)}
+                   className={finalClassName}
             />
 
         </label>);

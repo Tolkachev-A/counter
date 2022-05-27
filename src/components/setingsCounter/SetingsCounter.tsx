@@ -1,35 +1,35 @@
 import React from 'react';
-import style from "../counter/display.module.css";
-import {Input} from "../../common/input/Input";
 import {Button} from "../../common/button/Button";
+import {SetingsDisplay} from "./SetingsDisplay";
+import style from "../../common/button/button.module.css";
 
-type SetingsCounterPropsType = {
+export type SetingsCounterPropsType = {
     startValue: number
     setStartValue: (num: number) => void
     maxValue: number
     setMaxValue: (num: number) => void
     setSetings: () => void
-    isSetings:boolean
-    setIsSetings:(isSetings:boolean)=>void
+    isSetings: boolean
+    setIsSetings: (isSetings: boolean) => void
+    inCorrectValue: boolean
 
 }
-export const SetingsCounter: React.FC<SetingsCounterPropsType> = ({startValue, setStartValue, maxValue, setMaxValue, setSetings,setIsSetings,isSetings}) => {
-
-    const styleDisplay = 0 > 4 ? `${style.red} ${style.normal}` : `${style.normal}`
+export const SetingsCounter: React.FC<SetingsCounterPropsType> = (props) => {
 
     return (
-        <div className={styleDisplay}>
-            <Input value={startValue}
-                   callback={setStartValue}
-                   title={'startValue'}
-                   callbackOnFocus={setIsSetings}/>
-            <Input value={maxValue}
-                   callback={setMaxValue}
-                   title={'maxValue'}
-                   callbackOnFocus={setIsSetings}/>
-            <Button disabled={!isSetings}
-                    name={'set'}
-                    callback={setSetings}/>
+        <div>
+            <SetingsDisplay setIsSetings={props.setIsSetings}
+                            isSetings={props.isSetings}
+                            setStartValue={props.setStartValue}
+                            startValue={props.startValue}
+                            maxValue={props.maxValue}
+                            setMaxValue={props.setMaxValue}
+                            inCorrectValue={props.inCorrectValue}/>
+            <div className={`${style.btnBlock} ${style.btnBlockSetings}`}>
+                <Button disabled={!props.inCorrectValue || !props.isSetings}
+                        name={'set'}
+                        callback={props.setSetings}/>
+            </div>
         </div>
     );
 };

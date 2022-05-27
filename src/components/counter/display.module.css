@@ -2,10 +2,23 @@
     color: red;
 }
 .normal{
+    display: grid;
     padding: 20px 30px;
     background-color: #61dafb;
-    /*width: 200px;*/
-    margin: 10px auto;
+    margin: 20px 20px;
     border-radius: 15px;
     font-size: 30px;
+    height: 100px;
+    align-content: center;
+}
+
+.textValueCounter{
+    font-size: 45px;
+}
+
+.errorInpyt{
+    color: red;
+    border-color: red;
+    border-radius: 5px;
+    outline: none;
 }
