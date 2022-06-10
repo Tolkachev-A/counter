@@ -17,6 +17,7 @@ export type SetingsCounterPropsType = {
 export const SetingsCounter: React.FC<SetingsCounterPropsType> = (props) => {
 
     return (
+
         <div>
             <SetingsDisplay setIsSetings={props.setIsSetings}
                             isSetings={props.isSetings}
