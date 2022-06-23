@@ -2,14 +2,18 @@ import React from 'react';
 import {Display} from "./Display";
 import {Button} from "../../common/button/Button";
 import style from '../../common/button/button.module.css'
+import {killingValueCounter, setValueCounter} from "../../redux/reduser/counterReducer";
+import {ActionType, useAppDispatch} from "../../redux/store";
 
 export type CounterPropsType = {
     valueCounter: number
     setValueCounter: (num: number) => void
     maxValue: number
     startValue: number
-    isSetings: boolean
+    isSettings: boolean
     inCorrectValue: boolean
+    dispatch:(action:ActionType)=>void
+
 }
 
 export const Counter: React.FC<CounterPropsType> = (props) => {
@@ -17,16 +21,16 @@ export const Counter: React.FC<CounterPropsType> = (props) => {
         <div>
             <Display valueCounter={props.valueCounter}
                      maxValue={props.maxValue}
-                     isSetings={props.isSetings}
+                     isSetings={props.isSettings}
                      startValue={props.startValue}
                      inCorrectValue={props.inCorrectValue}/>
             <div className={style.btnBlock}>
                 <Button name={'inc'}
-                        callback={() => props.setValueCounter(props.valueCounter + 1)}
-                        disabled={props.isSetings || props.valueCounter >= props.maxValue}/>
+                        callback={() => props.dispatch(setValueCounter(props.valueCounter + 1))}
+                        disabled={props.isSettings || props.valueCounter >= props.maxValue}/>
                 <Button name={'reset'}
-                        callback={() => props.setValueCounter(props.startValue)}
-                        disabled={props.isSetings ||props.valueCounter === props.startValue}/>
+                        callback={() => props.dispatch(killingValueCounter(props.startValue))}
+                        disabled={props.isSettings ||props.valueCounter === props.startValue}/>
             </div>
         </div>
     );

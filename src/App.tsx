@@ -1,14 +1,26 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
-import {SetingsCounter} from "./components/setingsCounter/SetingsCounter";
+import {SettingsCounter} from "./components/settingsCounter/SettingsCounter";
 import {Counter} from "./components/counter/Counter";
+import {useAppDispatch, useAppSelector} from "./redux/store";
+import {setValueCounter} from "./redux/reduser/counterReducer";
+import {setMaxValue, setStartValue, toggleSettings} from "./redux/reduser/settingsCounterReducer";
 
 function App() {
 
-    const [valueCounter, setValueCounter] = useState(0)
-    const [startValue, setStartValue] = useState(0)
-    const [maxValue, setMaxValue] = useState(1)
-    const [isSetings, setIsSetings] = useState(false)
+
+    // const [startValue, setStartValue] = useState(0)
+    // const [maxValue, setMaxValue] = useState(1)
+
+    // const [isSettings, setIsSettings] = useState(false)
+
+    const dispatch = useAppDispatch()
+    const {valueCounter, startValue, maxValue, isSettings} = useAppSelector(state => ({
+        valueCounter: state.counterReducer.valueCounter,
+        startValue: state.settingsCounterReducer.startValue,
+        maxValue: state.settingsCounterReducer.maxValue,
+        isSettings: state.settingsCounterReducer.isSettings,
+    }))
 
 
     useEffect(() => {
@@ -17,9 +29,9 @@ function App() {
         let initialMaxValue = (localStorage.getItem('maxValue'))
 
         if (initialValue && initialStartValue && initialMaxValue) {
-            setValueCounter(JSON.parse(initialValue))
-            setStartValue(JSON.parse(initialStartValue))
-            setMaxValue(JSON.parse(initialMaxValue))
+            dispatch(setValueCounter(JSON.parse(initialValue)))
+            dispatch(setStartValue(JSON.parse(initialStartValue)))
+            dispatch(setMaxValue(JSON.parse(initialMaxValue)))
         }
 
     }, [])
@@ -32,32 +44,29 @@ function App() {
     }, [valueCounter, startValue, maxValue])
 
 
-    const setSetings = () => {
-        setValueCounter(startValue)
-        setIsSetings(false)
+    const setSettings = () => {
+        dispatch(setValueCounter(startValue))
+        dispatch(toggleSettings(false))
     }
 
     const inCorrectValue = startValue < maxValue
 
     return (
         <div className='container '>
-            <div className={'setingsCounterBlock counter'}>
-                <SetingsCounter setMaxValue={setMaxValue}
-                                maxValue={maxValue}
-                                startValue={startValue}
-                                setStartValue={setStartValue}
-                                setSetings={setSetings}
-                                setIsSetings={setIsSetings}
-                                isSetings={isSetings}
-                                inCorrectValue={inCorrectValue}/>
+            <div className={'counter'}>
+                <SettingsCounter setSettings={setSettings}
+                                 isSettings={isSettings}
+                                 inCorrectValue={inCorrectValue}
+                />
             </div>
-            <div className={'counterBlock counter'}>
+            <div className={'counter'}>
                 <Counter setValueCounter={setValueCounter}
                          valueCounter={valueCounter}
                          maxValue={maxValue}
                          startValue={startValue}
-                         isSetings={isSetings}
-                         inCorrectValue={inCorrectValue}/>
+                         isSettings={isSettings}
+                         inCorrectValue={inCorrectValue}
+                         dispatch={dispatch}/>
 
             </div>
         </div>
