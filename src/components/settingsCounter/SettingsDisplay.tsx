@@ -5,14 +5,18 @@ import {useAppDispatch, useAppSelector} from "../../redux/store";
 import {setMaxValue, setStartValue, toggleSettings} from "../../redux/reduser/settingsCounterReducer";
 
 
-type SettingsDisplayPropsType = {
+type StateType = {
+    maxValue: number
+    startValue: number
     inCorrectValue: boolean
 }
-export const SettingsDisplay: React.FC<SettingsDisplayPropsType> = (props) => {
+
+export const SettingsDisplay: React.FC = (props) => {
     const dispatch = useAppDispatch()
-    const {startValue, maxValue} = useAppSelector(state => ({
+    const {startValue, maxValue, inCorrectValue} = useAppSelector<StateType>(state => ({
         maxValue: state.settingsCounterReducer.maxValue,
         startValue: state.settingsCounterReducer.startValue,
+        inCorrectValue: state.settingsCounterReducer.inCorrectValue
     }))
 
     const startValueHandler = (num: number) => {
@@ -25,7 +29,7 @@ export const SettingsDisplay: React.FC<SettingsDisplayPropsType> = (props) => {
         dispatch(toggleSettings(true))
     }
 
-    const errorInput = !props.inCorrectValue ? style.errorInpyt : ''
+    const errorInput = !inCorrectValue ? style.errorInpyt : ''
     const styleDisplay = 0 > 4 ? `${style.red} ${style.normal}` : `${style.normal}`
 
 

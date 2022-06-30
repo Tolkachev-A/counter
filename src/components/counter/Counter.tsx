@@ -3,34 +3,44 @@ import {Display} from "./Display";
 import {Button} from "../../common/button/Button";
 import style from '../../common/button/button.module.css'
 import {killingValueCounter, setValueCounter} from "../../redux/reduser/counterReducer";
-import {ActionType, useAppDispatch} from "../../redux/store";
+import {useAppDispatch, useAppSelector} from "../../redux/store";
 
-export type CounterPropsType = {
+
+export type StateType = {
+    isSettings: boolean
     valueCounter: number
-    setValueCounter: (num: number) => void
     maxValue: number
     startValue: number
-    isSettings: boolean
-    inCorrectValue: boolean
-    dispatch:(action:ActionType)=>void
-
+    inCorrectValue?: boolean
 }
 
-export const Counter: React.FC<CounterPropsType> = (props) => {
+export const Counter: React.FC = (props) => {
+    const dispatch = useAppDispatch()
+    const {isSettings, valueCounter, maxValue, startValue} = useAppSelector<StateType>(state => ({
+        isSettings: state.settingsCounterReducer.isSettings,
+        valueCounter: state.counterReducer.valueCounter,
+        maxValue: state.settingsCounterReducer.maxValue,
+        startValue: state.settingsCounterReducer.startValue
+    }))
+
+    const incCallbackHandler = () => {
+        dispatch(setValueCounter(valueCounter + 1))
+    }
+    const resetCallbackHandler = () => {
+        dispatch(killingValueCounter(startValue))
+    }
+    const isButtonIncDisabled = isSettings || valueCounter >= maxValue
+    const isButtonResetDisabled = isSettings || valueCounter === startValue
     return (
         <div>
-            <Display valueCounter={props.valueCounter}
-                     maxValue={props.maxValue}
-                     isSetings={props.isSettings}
-                     startValue={props.startValue}
-                     inCorrectValue={props.inCorrectValue}/>
+            <Display/>
             <div className={style.btnBlock}>
                 <Button name={'inc'}
-                        callback={() => props.dispatch(setValueCounter(props.valueCounter + 1))}
-                        disabled={props.isSettings || props.valueCounter >= props.maxValue}/>
+                        callback={incCallbackHandler}
+                        disabled={isButtonIncDisabled}/>
                 <Button name={'reset'}
-                        callback={() => props.dispatch(killingValueCounter(props.startValue))}
-                        disabled={props.isSettings ||props.valueCounter === props.startValue}/>
+                        callback={resetCallbackHandler}
+                        disabled={isButtonResetDisabled}/>
             </div>
         </div>
     );

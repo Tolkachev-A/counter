@@ -2,16 +2,17 @@ import {
     setMaxValue,
     setStartValue,
     settingsCounterReducer,
-    SettingsCounterValueType,
+    InitialStateType,
     toggleSettings
 } from "./settingsCounterReducer";
 
-let settingsCounterValue = {} as SettingsCounterValueType
+let settingsCounterValue = {} as InitialStateType
 beforeEach(() => {
     settingsCounterValue = {
         startValue: 0,
         maxValue: 0,
-        isSettings: false
+        isSettings: false,
+        inCorrectValue: true
     }
 })
 

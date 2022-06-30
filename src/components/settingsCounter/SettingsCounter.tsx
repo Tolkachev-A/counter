@@ -2,24 +2,35 @@ import React from 'react';
 import {Button} from "../../common/button/Button";
 import {SettingsDisplay} from "./SettingsDisplay";
 import style from "../../common/button/button.module.css";
+import {useAppDispatch, useAppSelector} from "../../redux/store";
+import {setValueCounter} from "../../redux/reduser/counterReducer";
 
-export type SettingsCounterPropsType = {
-    setSettings: () => void
-    isSettings: boolean
+export type SettingsCounterPropsType = {}
+type StateType = {
     inCorrectValue: boolean
-
-
+    isSettings: boolean
+    startValue: number
 }
 export const SettingsCounter: React.FC<SettingsCounterPropsType> = (props) => {
 
+    let {inCorrectValue, isSettings, startValue} = useAppSelector<StateType>(state => ({
+        inCorrectValue: state.settingsCounterReducer.inCorrectValue,
+        isSettings: state.settingsCounterReducer.inCorrectValue,
+        startValue: state.settingsCounterReducer.startValue
+    }))
+    const dispatch = useAppDispatch()
+
+    const setSettings = () => {
+        dispatch(setValueCounter(startValue))
+    }
+
     return (
         <div>
-            <SettingsDisplay
-                inCorrectValue={props.inCorrectValue}/>
+            <SettingsDisplay/>
             <div className={`${style.btnBlock} ${style.btnBlockSettings}`}>
-                <Button disabled={!props.inCorrectValue || !props.isSettings}
+                <Button disabled={!inCorrectValue || !isSettings}
                         name={'set'}
-                        callback={props.setSettings}/>
+                        callback={setSettings}/>
             </div>
         </div>
     );

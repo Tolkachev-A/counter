@@ -1,31 +1,34 @@
 import React from 'react';
 import style from './display.module.css'
+import {useAppSelector} from "../../redux/store";
+import {StateType} from "./Counter";
 
-type DisplayPropsType = {
-    valueCounter: number
-    maxValue: number
-    isSetings: boolean
-    startValue: number
-    inCorrectValue: boolean
-}
 
-export const Display: React.FC<DisplayPropsType> = (props) => {
+export const Display: React.FC = (props) => {
+    const {isSettings, valueCounter, maxValue, startValue, inCorrectValue} = useAppSelector<StateType>(state => ({
+        isSettings: state.settingsCounterReducer.isSettings,
+        valueCounter: state.counterReducer.valueCounter,
+        maxValue: state.settingsCounterReducer.maxValue,
+        startValue: state.settingsCounterReducer.startValue,
+        inCorrectValue: state.settingsCounterReducer.inCorrectValue
+    }))
+
     function styleDisplay() {
-        if (props.isSetings) {
-            return props.startValue >= props.maxValue ? `${style.red} ${style.normal}` : `${style.normal}`
+        if (isSettings) {
+            return startValue >= maxValue ? `${style.red} ${style.normal}` : `${style.normal}`
         } else {
-            return props.valueCounter >= props.maxValue ? `${style.red} ${style.normal}` : `${style.normal}`
+            return valueCounter >= maxValue ? `${style.red} ${style.normal}` : `${style.normal}`
         }
     }
 
-    const vslueTextIsSetings = props.inCorrectValue ? 'enter value and press \'set\'' : 'In correct value'
+    const valueTextIsSettings = inCorrectValue ? 'enter value and press \'set\'' : 'In correct value'
 
     return (
         <div className={styleDisplay()}>
-            {props.isSetings
-                ? vslueTextIsSetings
+            {isSettings
+                ? valueTextIsSettings
                 : <span className={style.textValueCounter}>
-                    {props.valueCounter}
+                    {valueCounter}
                 </span>
             }
         </div>

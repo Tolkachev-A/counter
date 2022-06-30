@@ -1,4 +1,4 @@
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, compose, createStore, legacy_createStore} from "redux";
 import {counterReducer, KillingValueCounterType, setValueCounter, SetValueCounterType} from "./reduser/counterReducer";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {
@@ -14,7 +14,13 @@ const rootReducer = combineReducers({
     settingsCounterReducer
 })
 
-export const store = createStore(rootReducer)
+declare global {
+    interface Window {
+        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+    }
+}
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export const store = legacy_createStore(rootReducer, composeEnhancers(applyMiddleware()))
 
 export type ActionType =
     SetValueCounterType

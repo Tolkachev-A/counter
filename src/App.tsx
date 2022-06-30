@@ -4,22 +4,20 @@ import {SettingsCounter} from "./components/settingsCounter/SettingsCounter";
 import {Counter} from "./components/counter/Counter";
 import {useAppDispatch, useAppSelector} from "./redux/store";
 import {setValueCounter} from "./redux/reduser/counterReducer";
-import {setMaxValue, setStartValue, toggleSettings} from "./redux/reduser/settingsCounterReducer";
+import {setMaxValue, setStartValue} from "./redux/reduser/settingsCounterReducer";
+
+type StateType = {
+    valueCounter: number
+    startValue: number
+    maxValue: number
+}
 
 function App() {
-
-
-    // const [startValue, setStartValue] = useState(0)
-    // const [maxValue, setMaxValue] = useState(1)
-
-    // const [isSettings, setIsSettings] = useState(false)
-
     const dispatch = useAppDispatch()
-    const {valueCounter, startValue, maxValue, isSettings} = useAppSelector(state => ({
+    const {valueCounter, startValue, maxValue} = useAppSelector<StateType>(state => ({
         valueCounter: state.counterReducer.valueCounter,
         startValue: state.settingsCounterReducer.startValue,
         maxValue: state.settingsCounterReducer.maxValue,
-        isSettings: state.settingsCounterReducer.isSettings,
     }))
 
 
@@ -44,29 +42,13 @@ function App() {
     }, [valueCounter, startValue, maxValue])
 
 
-    const setSettings = () => {
-        dispatch(setValueCounter(startValue))
-        dispatch(toggleSettings(false))
-    }
-
-    const inCorrectValue = startValue < maxValue
-
     return (
         <div className='container '>
             <div className={'counter'}>
-                <SettingsCounter setSettings={setSettings}
-                                 isSettings={isSettings}
-                                 inCorrectValue={inCorrectValue}
-                />
+                <SettingsCounter/>
             </div>
             <div className={'counter'}>
-                <Counter setValueCounter={setValueCounter}
-                         valueCounter={valueCounter}
-                         maxValue={maxValue}
-                         startValue={startValue}
-                         isSettings={isSettings}
-                         inCorrectValue={inCorrectValue}
-                         dispatch={dispatch}/>
+                <Counter/>
 
             </div>
         </div>
