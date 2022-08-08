@@ -1,4 +1,5 @@
-import {counterReducer, initialStateType, killingValueCounter, setValueCounter} from "./counterReducer";
+import {counterReducer, initialStateType, killingValueCounter, setValueCounter} from './counterReducer';
+
 
 let countState = {} as initialStateType
 beforeEach(() => {

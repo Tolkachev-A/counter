@@ -1,9 +1,9 @@
 import React from 'react';
-import {Display} from "./Display";
-import {Button} from "../../common/button/Button";
+import {Display} from './Display';
+import {Button} from '../../common/button/Button';
 import style from '../../common/button/button.module.css'
-import {killingValueCounter, setValueCounter} from "../../redux/reduser/counterReducer";
-import {useAppDispatch, useAppSelector} from "../../redux/store";
+import {killingValueCounter, setValueCounter} from '../../redux/reduser/counterReducer/counterReducer';
+import {useAppDispatch, useAppSelector} from '../../redux/store';
 
 
 export type StateType = {

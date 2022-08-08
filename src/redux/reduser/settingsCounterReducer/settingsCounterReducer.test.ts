@@ -1,10 +1,10 @@
 import {
+    InitialStateType,
     setMaxValue,
     setStartValue,
     settingsCounterReducer,
-    InitialStateType,
     toggleSettings
-} from "./settingsCounterReducer";
+} from './settingsCounterReducer';
 
 let settingsCounterValue = {} as InitialStateType
 beforeEach(() => {

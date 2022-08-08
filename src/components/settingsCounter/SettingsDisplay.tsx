@@ -1,8 +1,12 @@
 import React from 'react';
-import {Input} from "../../common/input/Input";
-import style from "../counter/display.module.css";
-import {useAppDispatch, useAppSelector} from "../../redux/store";
-import {setMaxValue, setStartValue, toggleSettings} from "../../redux/reduser/settingsCounterReducer";
+import {Input} from '../../common/input/Input';
+import style from '../counter/display.module.css';
+import {useAppDispatch, useAppSelector} from '../../redux/store';
+import {
+    setMaxValue,
+    setStartValue,
+    toggleSettings
+} from '../../redux/reduser/settingsCounterReducer/settingsCounterReducer';
 
 
 type StateType = {

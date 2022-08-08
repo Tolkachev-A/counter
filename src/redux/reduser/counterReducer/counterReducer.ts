@@ -1,4 +1,4 @@
-import {ActionType} from "../store";
+import {ActionType} from '../../store';
 
 export type initialStateType = typeof initialState
 
@@ -21,9 +21,9 @@ const KILLING_VALUE = 'KILLING_VALUE'
 
 export const counterReducer = (state = initialState, action: ActionType): initialStateType => {
     switch (action.type) {
-        case "SET_VALUE":
+        case 'SET_VALUE':
             return {...state, valueCounter: action.payload}
-        case "KILLING_VALUE":
+        case 'KILLING_VALUE':
             return {...state, valueCounter: action.payload}
         default:
             return state
