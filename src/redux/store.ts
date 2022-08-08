@@ -30,7 +30,6 @@ const preloadedState = {
         startValue: loadStateStartValue()
     }
 }
-
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export const store = legacy_createStore(rootReducer, preloadedState, composeEnhancers(applyMiddleware()))
 

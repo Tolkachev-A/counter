@@ -1,10 +1,8 @@
-import {RootState} from '../redux/store';
-
 export const loadStateValueCounter = () => {
     try {
         const serializedState = localStorage.getItem('valueCounter');
         if (serializedState === null) {
-            return undefined;
+            return 0;
         }
         return JSON.parse(serializedState);
     } catch (err) {
@@ -15,7 +13,7 @@ export const loadStateMaxValue = () => {
     try {
         const serializedState = localStorage.getItem('maxValue');
         if (serializedState === null) {
-            return undefined;
+            return 1;
         }
         return JSON.parse(serializedState);
     } catch (err) {
@@ -26,7 +24,7 @@ export const loadStateStartValue = () => {
     try {
         const serializedState = localStorage.getItem('startValue');
         if (serializedState === null) {
-            return undefined;
+            return 0;
         }
         return JSON.parse(serializedState);
     } catch (err) {
